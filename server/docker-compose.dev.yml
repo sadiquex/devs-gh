@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  # PostgreSQL Database only (for development)
+  postgres:
+    image: postgres:15-alpine
+    container_name: devs_repo_db
+    environment:
+      POSTGRES_DB: devs_repo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - devs_repo_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  devs_repo_network:
+    driver: bridge
