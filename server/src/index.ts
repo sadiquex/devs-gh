@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
-import { AppDataSource } from "./config/database";
+import { AppDataSource } from "./config/data-source";
 import developerRoutes from "./routes/developer.routes";
 
 dotenv.config();

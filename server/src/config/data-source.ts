@@ -1,3 +1,7 @@
+import * as dotenv from "dotenv";
+dotenv.config(); // 👈 this must be BEFORE using process.env
+
+import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Developer } from "../entities/Developer";
 
@@ -8,7 +12,8 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME || "postgres",
   password: process.env.DB_PASSWORD || "password",
   database: process.env.DB_DATABASE || "devs_repo",
-  synchronize: process.env.NODE_ENV === "development", // Auto-sync in development
+  // synchronize: process.env.NODE_ENV === "development", // Auto-sync in development
+  synchronize: true,
   logging: process.env.NODE_ENV === "development",
   entities: [Developer],
   migrations: [],

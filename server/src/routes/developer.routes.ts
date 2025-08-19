@@ -1,26 +1,19 @@
 import { Router } from "express";
-import { DeveloperController } from "../controllers/DeveloperController";
+import {
+  createDeveloper,
+  getDevelopers,
+  getDeveloperById,
+} from "../controllers/developer.controller";
+import { validateBody } from "../middleware/validate";
+import { CreateDeveloperDto } from "../dtos/developer.dto";
 
 const router = Router();
-const developerController = new DeveloperController();
 
-// GET /api/developers - Get all developers
-router.get("/", (req, res) => developerController.getAllDevelopers(req, res));
+router
+  .route("/")
+  .get(getDevelopers)
+  .post([validateBody(CreateDeveloperDto), createDeveloper]);
 
-// GET /api/developers/:id - Get developer by ID
-router.get("/:id", (req, res) =>
-  developerController.getDeveloperById(req, res)
-);
-
-// POST /api/developers - Create new developer
-router.post("/", (req, res) => developerController.createDeveloper(req, res));
-
-// PUT /api/developers/:id - Update developer
-router.put("/:id", (req, res) => developerController.updateDeveloper(req, res));
-
-// DELETE /api/developers/:id - Delete developer
-router.delete("/:id", (req, res) =>
-  developerController.deleteDeveloper(req, res)
-);
+router.route("/:id").get(getDeveloperById);
 
 export default router;
