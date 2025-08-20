@@ -10,24 +10,24 @@ export const createDeveloper = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const {
       name,
-      email,
-      bio,
-      location,
-      website,
+      role,
+      yearsOfExperience,
+      portfolioLink,
+      twitterHandle,
       github,
       linkedin,
       skills,
       technologies,
     } = req.body;
 
-    const existing = await developerRepository.findOneBy({ email });
+    const existing = await developerRepository.findOneBy({ name });
     if (existing) {
       res
         .status(400)
         .json(
           ResponseBuilder.error(
-            "Email already exists",
-            "Email already exists",
+            "Developer already exists",
+            "Developer already exists",
             400,
             req.originalUrl
           )
@@ -37,10 +37,10 @@ export const createDeveloper = asyncHandler(
 
     const developer = developerRepository.create({
       name,
-      email,
-      bio,
-      location,
-      website,
+      role,
+      yearsOfExperience,
+      portfolioLink,
+      twitterHandle,
       github,
       linkedin,
       skills,
