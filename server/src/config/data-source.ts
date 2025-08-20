@@ -13,9 +13,9 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD || "password",
   database: process.env.DB_DATABASE || "devs_repo",
   // synchronize: process.env.NODE_ENV === "development", // Auto-sync in development
-  synchronize: true,
+  synchronize: false,
   logging: process.env.NODE_ENV === "development",
   entities: [Developer],
-  migrations: [],
+  migrations: ["src/migrations/*.ts"],
   subscribers: [],
 });
