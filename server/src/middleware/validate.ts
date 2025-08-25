@@ -3,7 +3,11 @@ import { validate } from "class-validator";
 import { NextFunction, Request, Response } from "express";
 
 export function validateBody<T extends object>(dto: new () => T) {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void | Response> => {
     const instance = plainToInstance(dto, req.body ?? {});
     const errors = await validate(instance, { whitelist: true });
 
