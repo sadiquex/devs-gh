@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import express from "express";
+// import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/developers", developerRoutes);
 
-app.get("/health", (req, res) => {
+app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "OK", message: "Server is running" });
 });
 
